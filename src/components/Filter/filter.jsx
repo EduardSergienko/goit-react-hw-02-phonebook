@@ -1,8 +1,8 @@
-export const Filter = ({ onChange, value }) => {
+export const Filter = props => {
   return (
     <label>
       Find
-      <input onChange={onChange} type="text" value={value} />
+      <input onChange={props.onChange} type="text" value={props.value} />
     </label>
   );
 };
