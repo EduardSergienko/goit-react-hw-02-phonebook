@@ -4,9 +4,15 @@ import ContactForm from './ContactForm/contactForm';
 import { Filter } from './Filter/filter';
 import { ContactList } from './ContactList/contactList';
 import styles from './appWrap.module.scss';
+import { ContactItem } from './ContactItem/contactItem';
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
     filter: '',
   };
 
@@ -16,7 +22,7 @@ export class App extends Component {
     const { name, number } = data;
 
     if (contacts.some(contact => contact.name === name)) {
-      return alert('nonono');
+      return alert(`${name} is already in contacts`);
     } else {
       const contact = {
         id: nanoid(),
@@ -66,10 +72,12 @@ export class App extends Component {
         )}
 
         {filteredContacts.length > 0 && (
-          <ContactList
-            contacts={filteredContacts}
-            onDeleteBtnClick={this.deleteContact}
-          />
+          <ContactList>
+            <ContactItem
+              contacts={filteredContacts}
+              onDeleteBtnClick={this.deleteContact}
+            />
+          </ContactList>
         )}
       </>
     );
