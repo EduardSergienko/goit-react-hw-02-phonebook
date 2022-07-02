@@ -3,14 +3,14 @@ import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/contactForm';
 import { Filter } from './Filter/filter';
 import { ContactList } from './ContactList/contactList';
-
+import styles from './appWrap.module.scss';
 export class App extends Component {
   state = {
     contacts: [],
     filter: '',
   };
 
-  formData = data => {
+  addContact = data => {
     console.log(data);
     const { contacts } = this.state;
     const { name, number } = data;
@@ -44,7 +44,7 @@ export class App extends Component {
       contact.name.toLowerCase().includes(toLower)
     );
   };
-  deletContact = contactid => {
+  deleteContact = contactid => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactid),
     }));
@@ -55,16 +55,22 @@ export class App extends Component {
 
     return (
       <>
-        <h1>Phoneboock</h1>
-        <ContactForm onSubmit={this.formData} />
-        <div>
-          <h2>Contacts</h2>
+        <h1 className={styles.appTitle}>Phonebook</h1>
+        <ContactForm onSubmit={this.addContact} />
+
+        <h2 className={styles.appTitle}>Contacts</h2>
+        {filteredContacts.length > 0 ? (
           <Filter onChange={this.onfilterInputType} value={filter} />
+        ) : (
+          <h2 className={styles.appTitle}>Your contact list is empty...</h2>
+        )}
+
+        {filteredContacts.length > 0 && (
           <ContactList
             contacts={filteredContacts}
-            onDeletbtnClick={this.deletContact}
+            onDeleteBtnClick={this.deleteContact}
           />
-        </div>
+        )}
       </>
     );
   }
