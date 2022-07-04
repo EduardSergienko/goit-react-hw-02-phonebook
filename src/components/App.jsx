@@ -72,9 +72,7 @@ export class App extends Component {
         {contacts.length > 1 && (
           <Filter onChange={this.onfilterInputType} value={filter} />
         )}
-        {filteredContacts.length === 0 && (
-          <h2 className={styles.appTitle}>Sorry, contact not found... </h2>
-        )}
+
         {contacts.length > 0 ? (
           <ContactList
             contacts={filteredContacts}

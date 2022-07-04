@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import styles from './contactItem.module.scss';
-export const ContactItem = ({ id, name, number, onDeleteBtnClick }) => {
+export const ContactItem = ({ name, number, onDeleteBtnClick }) => {
   return (
-    <li className={styles.contactList__item} key={id}>
+    <li className={styles.contactList__item}>
       <p className={styles.contactList__name}> {name}: </p>
       <p className={styles.contactList__number}>{number}</p>
       <button
@@ -16,12 +16,7 @@ export const ContactItem = ({ id, name, number, onDeleteBtnClick }) => {
   );
 };
 ContactItem.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
   onDeleteBtnClick: PropTypes.func.isRequired,
 };

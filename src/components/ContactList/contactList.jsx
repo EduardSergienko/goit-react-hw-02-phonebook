@@ -1,5 +1,5 @@
 import styles from 'components/ContactList/contactList.module.scss';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { ContactItem } from 'components/ContactItem/contactItem';
 export const ContactList = ({ contacts, onDeleteBtnClick }) => {
   return (
@@ -8,7 +8,6 @@ export const ContactList = ({ contacts, onDeleteBtnClick }) => {
         return (
           <ContactItem
             key={id}
-            id={id}
             name={name}
             number={number}
             onDeleteBtnClick={() => onDeleteBtnClick(id)}
@@ -19,6 +18,10 @@ export const ContactList = ({ contacts, onDeleteBtnClick }) => {
   );
 };
 
-// ContactList.propTypes = {
-//   children: PropTypes.node.isRequired,
-// };
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  ),
+};
