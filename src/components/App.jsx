@@ -38,7 +38,6 @@ export class App extends Component {
         contacts: [...contacts, contact],
       }));
     }
-    console.log(contacts);
   };
 
   onfilterInputType = e => {
