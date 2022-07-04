@@ -4,7 +4,7 @@ import ContactForm from './ContactForm/contactForm';
 import { Filter } from './Filter/filter';
 import { ContactList } from './ContactList/contactList';
 import styles from './appWrap.module.scss';
-import { ContactItem } from './ContactItem/contactItem';
+
 export class App extends Component {
   state = {
     contacts: [
@@ -72,12 +72,10 @@ export class App extends Component {
         )}
 
         {filteredContacts.length > 0 && (
-          <ContactList>
-            <ContactItem
-              contacts={filteredContacts}
-              onDeleteBtnClick={this.deleteContact}
-            />
-          </ContactList>
+          <ContactList
+            contacts={filteredContacts}
+            onDeleteBtnClick={this.deleteContact}
+          />
         )}
       </>
     );
