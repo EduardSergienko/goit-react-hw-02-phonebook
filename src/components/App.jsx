@@ -21,7 +21,11 @@ export class App extends Component {
     const { contacts } = this.state;
     const { name, number } = data;
 
-    if (contacts.some(contact => contact.name === name)) {
+    if (
+      contacts.some(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
       return alert(`${name} is already in contacts`);
     } else {
       const contact = {
@@ -46,6 +50,7 @@ export class App extends Component {
   filteredContactList = () => {
     const { contacts, filter } = this.state;
     const toLower = filter.toLowerCase();
+
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(toLower)
     );
@@ -56,26 +61,27 @@ export class App extends Component {
     }));
   };
   render() {
-    const { filter } = this.state;
+    const { contacts, filter } = this.state;
     const filteredContacts = this.filteredContactList();
 
     return (
       <>
         <h1 className={styles.appTitle}>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
-
         <h2 className={styles.appTitle}>Contacts</h2>
-        {filteredContacts.length > 0 ? (
+        {contacts.length > 1 && (
           <Filter onChange={this.onfilterInputType} value={filter} />
-        ) : (
-          <h2 className={styles.appTitle}>Your contact list is empty...</h2>
         )}
-
-        {filteredContacts.length > 0 && (
+        {filteredContacts.length === 0 && (
+          <h2 className={styles.appTitle}>Sorry, contact not found... </h2>
+        )}
+        {contacts.length > 0 ? (
           <ContactList
             contacts={filteredContacts}
             onDeleteBtnClick={this.deleteContact}
           />
+        ) : (
+          <h2 className={styles.appTitle}>Your contact list is empty...</h2>
         )}
       </>
     );
